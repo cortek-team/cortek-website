@@ -25,7 +25,10 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         /* === CSS VARIABLES === */
@@ -45,7 +48,7 @@
             --gradient-neon: linear-gradient(135deg, #F5A524 0%, #FFD700 50%, #FFFF80 100%);
             --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
             
-            --font-primary: 'Inter', sans-serif;
+            --font-primary: 'Poppins', sans-serif;
             --font-display: 'Playfair Display', serif;
             --font-tech: 'Orbitron', monospace;
             
@@ -196,6 +199,39 @@
             100% { width: 100%; }
         }
 
+        /* === SCROLL TO TOP BUTTON === */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-accent);
+            color: var(--primary);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: var(--shadow-glow);
+            transition: var(--transition-bounce);
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: var(--shadow-neon);
+        }
+
         /* === CUSTOM CURSOR === */
         .cursor {
             width: 20px;
@@ -277,6 +313,8 @@
             position: relative;
             z-index: 2;
             max-width: 800px;
+            width: 100%;
+            text-align: center;
         }
 
         .hero-badge {
@@ -320,12 +358,15 @@
             margin-bottom: 2.5rem;
             line-height: 1.5;
             max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-stats {
             display: flex;
             gap: 3rem;
             margin: 3rem 0;
+            justify-content: center;
         }
 
         .stat {
@@ -866,6 +907,24 @@
             font-size: 1rem;
             color: var(--white);
             transition: var(--transition);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        /* Custom dropdown styling */
+        .form-group select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23F5A524' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 16px;
+            padding-right: 3rem;
+        }
+
+        .form-group select option {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem;
         }
 
         .form-group input:focus,
@@ -1115,6 +1174,14 @@
             .cta-title {
                 font-size: 2.8rem;
             }
+            
+            .hero-stats {
+                gap: 2rem;
+            }
+            
+            .process-steps {
+                gap: 1rem;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1129,11 +1196,13 @@
             .hero-stats {
                 flex-direction: column;
                 gap: 1.5rem;
+                margin: 2rem 0;
             }
             
             .process-steps {
                 flex-direction: column;
                 gap: 2rem;
+                margin: 2rem 0;
             }
             
             .process-steps::before {
@@ -1143,6 +1212,7 @@
             .cta-features {
                 flex-direction: column;
                 gap: 1rem;
+                margin: 2rem 0;
             }
             
             .modal-content {
@@ -1151,6 +1221,7 @@
             
             .cta-section {
                 padding: 3rem 2rem;
+                margin: 2rem auto;
             }
             
             .floating-element {
@@ -1159,6 +1230,7 @@
             
             .hero-subtitle {
                 font-size: 1.2rem;
+                margin-bottom: 2rem;
             }
             
             .cta-title {
@@ -1167,6 +1239,41 @@
             
             .cta-subtitle {
                 font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+            
+            section {
+                padding: 5rem 0;
+            }
+            
+            .section-header {
+                margin-bottom: 4rem;
+            }
+            
+            .problem-grid,
+            .solution-grid {
+                gap: 1.5rem;
+            }
+            
+            .glass-card {
+                padding: 2rem;
+            }
+            
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+            
+            /* Center hero button on mobile */
+            .hero-content {
+                text-align: center;
+            }
+            
+            .magnetic-btn {
+                display: flex;
+                justify-content: center;
             }
         }
 
@@ -1231,6 +1338,30 @@
             .loading-bar {
                 width: 250px;
             }
+            
+            .hero-badge {
+                font-size: 0.75rem;
+                padding: 0.6rem 1.2rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .problem-icon, .solution-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .scroll-to-top {
+                bottom: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -1249,6 +1380,11 @@
 
     <!-- Scroll Progress Bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
 
     <!-- Interactive Background Grid -->
     <div class="interactive-grid"></div>
@@ -1273,7 +1409,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-badge reveal-text">
-                    <span>🚀</span>
+                    <i class="fas fa-rocket"></i>
                     LIMITED TIME OFFER - FREE WEBSITE AUDIT
                 </div>
                 <h1 class="reveal-text">Your Website Is Costing You <span style="background: var(--gradient-neon); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Money</span></h1>
@@ -1299,7 +1435,7 @@
                 <div class="magnetic-btn">
                     <button class="btn" id="openModalBtn">
                         <span class="btn-content">Book Free 15-Min Audit</span>
-                        <span>🚀</span>
+                        <i class="fas fa-rocket"></i>
                     </button>
                 </div>
             </div>
@@ -1321,7 +1457,9 @@
             <div class="problem-grid">
                 <div class="glass-card fade-in tilt-card">
                     <div class="tilt-card-inner">
-                        <div class="problem-icon">📱</div>
+                        <div class="problem-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
                         <h3>Static Digital Brochures</h3>
                         <p>Beautiful sites that don't guide visitors toward conversion. No strategy, just pretty pictures that look good but don't sell.</p>
                     </div>
@@ -1329,7 +1467,9 @@
                 
                 <div class="glass-card fade-in tilt-card">
                     <div class="tilt-card-inner">
-                        <div class="problem-icon">🔍</div>
+                        <div class="problem-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
                         <h3>Zero SEO Foundation</h3>
                         <p>Built without search engine optimization, making you invisible to 93% of potential customers who start with search engines.</p>
                     </div>
@@ -1337,7 +1477,9 @@
                 
                 <div class="glass-card fade-in tilt-card">
                     <div class="tilt-card-inner">
-                        <div class="problem-icon">💸</div>
+                        <div class="problem-icon">
+                            <i class="fas fa-funnel-dollar"></i>
+                        </div>
                         <h3>No Sales Funnels</h3>
                         <p>Missing lead capture systems and conversion paths that turn visitors into customers. Your traffic has nowhere to go.</p>
                     </div>
@@ -1434,7 +1576,7 @@
                     <div class="magnetic-btn">
                         <button class="btn" id="ctaOpenModalBtn">
                             <span class="btn-content">Book Free Strategy Call</span>
-                            <span>🚀</span>
+                            <i class="fas fa-rocket"></i>
                         </button>
                     </div>
                 </div>
@@ -1451,24 +1593,28 @@
                 <h3>Book Your Free Audit</h3>
                 <p class="modal-subtitle">Complete the form below and we'll contact you within 24 hours</p>
                 
-                <form id="contactForm">
+                <form action="https://api.web3forms.com/submit" method="POST" id="contactForm">
+                    <input type="hidden" name="access_key" value="41079b40-0953-43b0-80a3-1cc989e86c89">
+                    <input type="hidden" name="subject" value="New Website Audit Request from Cortek Website">
+                    <input type="checkbox" name="botcheck" style="display: none;">
+                    
                     <div class="form-group">
-                        <input type="text" id="name" class="form-input" placeholder=" " required>
+                        <input type="text" id="name" name="name" class="form-input" placeholder=" " required>
                         <label for="name" class="form-label">Full Name</label>
                     </div>
                     
                     <div class="form-group">
-                        <input type="email" id="email" class="form-input" placeholder=" " required>
+                        <input type="email" id="email" name="email" class="form-input" placeholder=" " required>
                         <label for="email" class="form-label">Email Address</label>
                     </div>
                     
                     <div class="form-group">
-                        <input type="tel" id="phone" class="form-input" placeholder=" ">
+                        <input type="tel" id="phone" name="phone" class="form-input" placeholder=" ">
                         <label for="phone" class="form-label">Phone Number (Optional)</label>
                     </div>
                     
                     <div class="form-group">
-                        <select id="service" class="form-input" required>
+                        <select id="service" name="service" class="form-input" required>
                             <option value="" disabled selected></option>
                             <option value="website">Website Development</option>
                             <option value="redesign">Website Redesign</option>
@@ -1479,19 +1625,21 @@
                     </div>
                     
                     <div class="form-group">
-                        <textarea id="message" class="form-input" placeholder=" "></textarea>
+                        <textarea id="message" name="message" class="form-input" placeholder=" "></textarea>
                         <label for="message" class="form-label">Additional Details (Optional)</label>
                     </div>
                     
                     <button type="submit" class="btn" style="width: 100%;">
                         <span class="btn-content">Submit Request</span>
-                        <span>🚀</span>
+                        <i class="fas fa-rocket"></i>
                     </button>
                 </form>
             </div>
             
             <div class="success-message" id="successMessage">
-                <div class="problem-icon" style="margin: 0 auto 2rem; font-size: 3rem;">✅</div>
+                <div class="problem-icon" style="margin: 0 auto 2rem; font-size: 3rem;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
                 <h3>Request Submitted!</h3>
                 <p>Thank you for your interest. We'll contact you within 24 hours to schedule your free audit.</p>
                 <button class="btn btn-secondary" id="closeSuccessBtn" style="margin-top: 2rem;">
@@ -1515,6 +1663,24 @@
                     splashScreen.style.display = 'none';
                 }, 500);
             }, 5000); // Total animation time: 5 seconds
+        });
+
+        // === SCROLL TO TOP BUTTON ===
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
 
         // === CUSTOM CURSOR ===
@@ -1744,8 +1910,8 @@
             }
         });
 
-        // Form submission
-        contactForm.addEventListener('submit', (e) => {
+        // Form submission with Web3Forms - FIXED VERSION
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             // Show loading state
@@ -1754,18 +1920,32 @@
             submitBtn.innerHTML = '<span class="btn-content">Processing...</span>';
             submitBtn.disabled = true;
             
-            // Simulate form submission
-            setTimeout(() => {
-                modalForm.style.display = 'none';
-                successMessage.classList.add('visible');
+            try {
+                const formData = new FormData(contactForm);
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData
+                });
                 
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Show success message
+                    modalForm.style.display = 'none';
+                    successMessage.classList.add('visible');
+                    console.log('Form submitted successfully');
+                } else {
+                    alert('There was an error submitting the form. Please try again.');
+                    console.error('Form submission error:', data);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error submitting the form. Please try again.');
+            } finally {
                 // Reset button
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
-                
-                // In a real implementation, you would send the form data to a server here
-                console.log('Form submitted successfully');
-            }, 1500);
+            }
         });
 
         // === INITIALIZATION ===
@@ -1783,16 +1963,20 @@
             }, 500);
         });
 
-        // Add interactive hover effects
+        // Add interactive hover effects - FIXED VERSION
         document.querySelectorAll('.btn, .glass-card, .process-step').forEach(element => {
             element.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(1.5)';
-                cursor.style.borderColor = 'var(--accent-neon)';
+                if (cursor) {
+                    cursor.style.transform = 'scale(1.5)';
+                    cursor.style.borderColor = 'var(--accent-neon)';
+                }
             });
             
             element.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-                cursor.style.borderColor = 'var(--accent)';
+                if (cursor) {
+                    cursor.style.transform = 'scale(1)';
+                    cursor.style.borderColor = 'var(--accent)';
+                }
             });
         });
     </script>
